@@ -6,7 +6,7 @@ export function useRequestMutations() {
   const busy = ref(false)
   const errorMessage = ref<string | null>(null)
 
-  async function patchRequest(id: string, body: Record<string, unknown>, previous?: Request) {
+  async function patchRequest(id: string, body: Record<string, unknown>) {
     busy.value = true
     errorMessage.value = null
     try {
@@ -46,7 +46,6 @@ export function useRequestMutations() {
   }
 
   async function transition(request: Request, to: RequestStatus, extra: Record<string, unknown> = {}) {
-    const previous = { status: request.status, version: request.version }
     const result = await $fetch<{ request: Request }>(`/api/requests/${request.id}/transition`, {
       method: 'POST',
       body: { to, version: request.version, ...extra }
@@ -56,7 +55,6 @@ export function useRequestMutations() {
       label: 'Отменить статус',
       run: async () => {
         errorMessage.value = 'Предыдущий статус нельзя вернуть автоматически, если переход необратим. Обновите карточку.'
-        void previous
       }
     })
     return result.request
