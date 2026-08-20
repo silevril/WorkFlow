@@ -35,11 +35,11 @@ async function submit() {
   <div class="mx-auto max-w-md px-4 py-16">
     <h1 class="font-display text-4xl">Вход</h1>
     <p class="mt-2 text-ink-soft">Учебные пароли одинаковые: DemoPass123!</p>
-    <form class="mt-8 space-y-4 rounded-3xl bg-white p-6" @submit.prevent="submit">
+    <form class="mt-8 space-y-4 rounded-3xl bg-white p-6" data-testid="login-form" @submit.prevent="submit">
       <AppInput id="email" v-model="email" label="Email" type="email" />
       <AppInput id="password" v-model="password" label="Пароль" type="password" />
       <p v-if="error" class="text-sm text-danger" role="alert">{{ error }}</p>
-      <AppButton type="submit" :disabled="pending">Войти</AppButton>
+      <AppButton type="submit" :disabled="pending" data-testid="login-submit">Войти</AppButton>
     </form>
     <ul class="mt-6 space-y-2 text-sm">
       <li v-for="item in accounts" :key="item.email">

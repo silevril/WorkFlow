@@ -18,7 +18,8 @@ export function useAuth() {
   async function login(email: string, password: string) {
     const data = await $fetch<{ user: PublicUser }>('/api/auth/login', {
       method: 'POST',
-      body: { email, password }
+      body: { email, password },
+      credentials: 'include'
     })
     user.value = data.user
     return data.user

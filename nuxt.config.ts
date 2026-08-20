@@ -10,7 +10,7 @@ export default defineNuxtConfig({
     plugins: [tailwindcss()]
   },
   runtimeConfig: {
-    databaseUrl: process.env.DATABASE_URL || '',
+    databaseUrl: process.env.NUXT_DATABASE_URL || process.env.DATABASE_URL || '',
     sessionPassword: process.env.NUXT_SESSION_PASSWORD || 'workflow-dev-session-password-32ch',
     apiLatencyMs: Number(process.env.API_LATENCY_MS || 0),
     public: {
